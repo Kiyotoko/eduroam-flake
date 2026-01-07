@@ -29,9 +29,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5.0.0
 
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31.8.0
+
       - name: Rebuild with Python
-        run: |
-          nix-shell -p "python3.withPackages (ps: with ps; [ requests ])" --run "python update.py"
+        run: ./update.py
 
       - name: Create Pull Request
         if: 
